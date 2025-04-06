@@ -1,0 +1,71 @@
+- route:
+    id: incoming
+    description: Incoming Accounts REST
+    from:
+      id: incoming-rest-accounts
+      description: Accounts REST Service
+      uri: rest
+      parameters:
+        method: get
+        path: accounts
+      steps:
+        - to:
+            id: logger-1
+            uri: log
+            parameters:
+              loggerName: InfoLogger
+              showHeaders: true
+        - to:
+            id: direct-customer-out
+            uri: direct
+            parameters:
+              name: direct-customer
+- route:
+    id: outgoing
+    description: Outgoing to Customer REST
+    from:
+      id: direct-customer-in
+      uri: direct
+      parameters:
+        name: direct-customer
+      steps:
+        - removeHeaders:
+            id: removeHeaders-1
+            pattern: CamelHttp*
+        - to:
+            id: outgoing-rest-customers
+            uri: rest
+            parameters:
+              host: localhost:8081
+              method: get
+              path: customers
+        - to:
+            id: logger-2
+            uri: log
+            parameters:
+              loggerName: InfoLogger
+              showHeaders: true
+        - to:
+            id: direct-database-out
+            uri: direct
+            parameters:
+              name: direct-database
+- route:
+    id: route-1969
+    from:
+      id: direct-database-in
+      uri: direct
+      parameters:
+        name: direct-database
+      steps:
+        - to:
+            id: to-8000
+            uri: jpa
+            parameters:
+              persistenceUnit: camel
+        - to:
+            id: logger-3
+            uri: log
+            parameters:
+              loggerName: InfoLogger
+              showHeaders: true
