@@ -9,8 +9,12 @@ import jakarta.ws.rs.core.MediaType;
 public class CustomerResource {
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String customers() {
-        return "[Customer1, Customer2, Customer3, Customer4]";
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Customer> customers() {
+        List<Customer> customers = new ArrayList<Customer>();
+        Customer customer1 = new Customer();
+        customer1.setName("Customer 1");
+        customers.add(customer);
+        return customers;
     }
 }
