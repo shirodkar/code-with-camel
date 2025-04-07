@@ -1,5 +1,5 @@
 - route:
-    id: incoming
+    id: incoming-rest-accounts
     description: Incoming Accounts REST
     from:
       id: incoming-rest-accounts
@@ -21,7 +21,7 @@
             parameters:
               name: direct-customer
 - route:
-    id: outgoing
+    id: outgoing-rest-customers
     description: Outgoing to Customer REST
     from:
       id: direct-customer-in
@@ -52,7 +52,8 @@
             parameters:
               name: direct-database
 - route:
-    id: route-1969
+    id: db-persistence
+    description: Database Persistence
     from:
       id: direct-database-in
       uri: direct
