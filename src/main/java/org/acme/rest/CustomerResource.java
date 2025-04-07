@@ -20,8 +20,10 @@ public class CustomerResource {
         Customer customer1 = new Customer();
         customer1.name = "Customer 1";
         customers.add(customer1);
-        // Customer customer2 = new Customer(2L, "Customer 2");
-        // customers.add(customer2);
+        Customer customer2 = new Customer();
+        customer2.name = "Customer 2";
+        customers.add(customer2);
+
         return customers;
     }
 }
