@@ -17,10 +17,11 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> customers() {
         List<Customer> customers = new ArrayList<>();
-        Customer customer1 = new Customer(1L, "Customer 1");
+        Customer customer1 = new Customer();
+        customer1.name = "Customer 1";
         customers.add(customer1);
-        Customer customer2 = new Customer(2L, "Customer 2");
-        customers.add(customer2);
+        // Customer customer2 = new Customer(2L, "Customer 2");
+        // customers.add(customer2);
         return customers;
     }
 }

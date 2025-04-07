@@ -8,6 +8,7 @@
       parameters:
         method: get
         path: accounts
+        produces: application/json
       steps:
         - to:
             id: logger-1
@@ -40,6 +41,7 @@
               host: localhost:8081
               method: get
               path: customers
+              produces: application/json
         - unmarshal:
             id: unmarshal-2082
             json:
@@ -69,7 +71,10 @@
             id: jpa
             uri: jpa
             parameters:
-              entityType: java.util.List
+              entityType: java.util.List<org.acme.entity.Customer>
+              flushOnSend: true
+              joinTransaction: true
+              lazyStartProducer: false
               maximumResults: "-1"
               persistenceUnit: default
               useExecuteUpdate: false
@@ -81,3 +86,7 @@
             parameters:
               loggerName: InfoLogger
               showHeaders: true
+            disabled: false
+        - marshal:
+            id: marshal-8116
+            json: {}
