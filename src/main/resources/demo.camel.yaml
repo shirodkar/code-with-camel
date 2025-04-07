@@ -64,12 +64,10 @@
             parameters:
               entityType: Customer
               persistenceUnit: camel
+            disabled: true
         - to:
             id: logger-3
             uri: log
             parameters:
               loggerName: InfoLogger
               showHeaders: true
-- beans:
-    - name: Customer
-      type: org.acme.rest.Customer
