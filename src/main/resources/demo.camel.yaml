@@ -62,6 +62,7 @@
             id: to-8000
             uri: jpa
             parameters:
+              entityType: Customer
               persistenceUnit: camel
         - to:
             id: logger-3
@@ -69,3 +70,6 @@
             parameters:
               loggerName: InfoLogger
               showHeaders: true
+- beans:
+    - name: Customer
+      type: org.acme.rest.Customer
