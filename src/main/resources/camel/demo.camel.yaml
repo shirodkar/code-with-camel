@@ -64,7 +64,7 @@
             parameters:
               entityType: Customer
               persistenceUnit: camel
-            disabled: true
+            disabled: false
         - to:
             id: logger-3
             uri: log
