@@ -40,6 +40,11 @@
               host: localhost:8081
               method: get
               path: customers
+        - unmarshal:
+            id: unmarshal-2082
+            json:
+              unmarshalType: org.acme.entity.Customer
+              useList: true
         - to:
             id: logger-2
             uri: log
@@ -61,16 +66,13 @@
         name: direct-database
       steps:
         - to:
-            id: to-2065
-            uri: log:InfoLogger
-            parameters: {}
-        - to:
             id: jpa
             uri: jpa
             parameters:
-              entityType: Customer
-              maximumResults: "100"
+              entityType: java.util.List
+              maximumResults: "-1"
               persistenceUnit: default
+              useExecuteUpdate: false
               usePersist: false
             disabled: false
         - to:
@@ -79,6 +81,3 @@
             parameters:
               loggerName: InfoLogger
               showHeaders: true
-- beans:
-    - name: Customer
-      type: org.acme.entity.Customer
