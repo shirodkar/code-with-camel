@@ -36,6 +36,7 @@
             id: outgoing-rest-customers
             uri: rest
             parameters:
+              consumes: application/json
               host: localhost:8081
               method: get
               path: customers
@@ -59,11 +60,17 @@
         name: direct-database
       steps:
         - to:
-            id: to-8000
+            id: to-2065
+            uri: log:InfoLogger
+            parameters: {}
+        - to:
+            id: jpa
             uri: jpa
             parameters:
               entityType: Customer
-              persistenceUnit: camel
+              maximumResults: "100"
+              persistenceUnit: default
+              usePersist: false
             disabled: false
         - to:
             id: logger-3
