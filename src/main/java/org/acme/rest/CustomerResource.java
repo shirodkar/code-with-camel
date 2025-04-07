@@ -1,5 +1,7 @@
 package org.acme.rest;
 
+import org.acme.entity.Customer;
+
 import java.util.ArrayList;
 import java.util.List;
 

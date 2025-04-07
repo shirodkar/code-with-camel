@@ -71,3 +71,6 @@
             parameters:
               loggerName: InfoLogger
               showHeaders: true
+- beans:
+    - name: Customer
+      type: org.acme.entity.Customer
