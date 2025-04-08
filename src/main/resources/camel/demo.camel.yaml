@@ -14,7 +14,7 @@
             id: logger-1
             uri: log
             parameters:
-              loggerName: InfoLogger
+              loggerName: AccountsLogger
               showHeaders: true
         - to:
             id: direct-customer-out
@@ -51,7 +51,7 @@
             id: logger-2
             uri: log
             parameters:
-              loggerName: InfoLogger
+              loggerName: CustomersLogger
               showHeaders: true
         - to:
             id: direct-database-out
@@ -84,9 +84,50 @@
             id: logger-3
             uri: log
             parameters:
-              loggerName: InfoLogger
+              loggerName: DBLogger
               showHeaders: true
             disabled: false
         - marshal:
             id: marshal-8116
             json: {}
+        - to:
+            id: direct-kafka-out
+            uri: direct
+            parameters:
+              name: direct-kafka
+- route:
+    id: kafka-publish
+    description: Kafka Publish
+    from:
+      id: direct-kafka-in
+      uri: direct
+      parameters:
+        name: direct-kafka
+      steps:
+        - to:
+            id: to-2918
+            uri: kafka
+            parameters:
+              brokers: "{{kafka.brokers}}"
+              saslJaasConfig: "{{?kafka.saslJaasConfig}}"
+              saslMechanism: "{{?kafka.saslMechanism}}"
+              securityProtocol: "{{?kafka.securityProtocol}}"
+              topic: customer-topic
+- route:
+    id: route-5344
+    from:
+      id: from-2480
+      uri: kafka
+      parameters:
+        brokers: "{{kafka.brokers}}"
+        groupId: customer-consumer-group
+        saslJaasConfig: "{{?kafka.saslJaasConfig}}"
+        saslMechanism: "{{?kafka.saslMechanism}}"
+        securityProtocol: "{{?kafka.securityProtocol}}"
+        topic: customer-topic
+      steps:
+        - to:
+            id: to-3538
+            uri: log
+            parameters:
+              loggerName: KafkaLogger
