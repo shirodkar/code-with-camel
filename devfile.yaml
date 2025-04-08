@@ -12,10 +12,6 @@ components:
       sourceMapping: /projects
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       endpoints:
-      - name: accounts
-        targetPort: 8080
-        exposure: public
-        protocol: http
       - name: customers
         targetPort: 8081
         exposure: public
@@ -54,7 +50,7 @@ components:
       endpoints:
         - name: postgres
           targetPort: 5432
-          exposure: internal
+          exposure: public
   - volume:
       size: 4Gi
     name: projects
