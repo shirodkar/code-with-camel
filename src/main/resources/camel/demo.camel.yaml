@@ -114,7 +114,8 @@
               securityProtocol: "{{?kafka.securityProtocol}}"
               topic: customer-topic
 - route:
-    id: route-5344
+    id: kafka-subscribe
+    description: Kafka Subscribe
     from:
       id: from-2480
       uri: kafka
