@@ -127,7 +127,7 @@
         topic: customer-topic
       steps:
         - to:
-            id: to-3538
+            id: logger-4
             uri: log
             parameters:
               loggerName: KafkaLogger
