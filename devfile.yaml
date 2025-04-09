@@ -81,7 +81,7 @@ commands:
   - id: init-setup
     exec:
       label: '01: initial setup'
-      component: "tools"
+      component: dev-tooling
       workingDir: "${PROJECT_SOURCE}"
       commandLine: |
         #if sdkman is present use it
@@ -103,7 +103,7 @@ commands:
   - id: oc-login
     exec:
       label: '02: OC Login'
-      component: "tools"
+      component: dev-tooling
       commandLine: |
         clear
         echo
