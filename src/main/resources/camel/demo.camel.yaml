@@ -38,7 +38,7 @@
             uri: rest
             parameters:
               consumes: application/json
-              host: localhost:8081
+              host: localhost:8085
               method: get
               path: customers
               produces: application/json
