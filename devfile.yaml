@@ -10,7 +10,7 @@ components:
       cpuLimit: 2000m
       mountSources: true
       sourceMapping: /projects
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      image: quay.io/devfile/universal-developer-image
       endpoints:
       - name: customers
         targetPort: 8081
