@@ -95,8 +95,8 @@ commands:
         git config --local pull.rebase true
         git config --local fetch.prune true
         git config --local diff.colorMoved zebra
-        git config user.name "user"
-        git config user.email "user@opentlc.com"
+        git config --global user.name "user"
+        git config --global user.email "user@opentlc.com"
         echo "source /usr/share/bash-completion/completions/git" >> /home/user/.bashrc
         oc completion bash > /home/user/.oc_bash_completion
         echo "source /home/user/.oc_bash_completion" >> /home/user/.bashrc
