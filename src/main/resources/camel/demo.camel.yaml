@@ -1,5 +1,5 @@
 - route:
-    id: incoming-rest-accounts
+    id: rest-account-in
     description: Incoming Accounts REST
     from:
       id: incoming-rest-accounts
@@ -22,7 +22,7 @@
             parameters:
               name: direct-customer
 - route:
-    id: outgoing-rest-customers
+    id: rest-customer-out
     description: Outgoing to Customer REST
     from:
       id: direct-customer-in
@@ -90,45 +90,39 @@
         - marshal:
             id: marshal-8116
             json: {}
-#         - to:
-#             id: direct-kafka-out
-#             uri: direct
-#             parameters:
-#               name: direct-kafka
-# - route:
-#     id: kafka-publish
-#     description: Kafka Publish
-#     from:
-#       id: direct-kafka-in
-#       uri: direct
-#       parameters:
-#         name: direct-kafka
-#       steps:
-#         - to:
-#             id: to-2918
-#             uri: kafka
-#             parameters:
-#               brokers: "{{kafka.brokers}}"
-#               saslJaasConfig: "{{?kafka.saslJaasConfig}}"
-#               saslMechanism: "{{?kafka.saslMechanism}}"
-#               securityProtocol: "{{?kafka.securityProtocol}}"
-#               topic: customer-topic
-# - route:
-#     id: kafka-subscribe
-#     description: Kafka Subscribe
-#     from:
-#       id: from-2480
-#       uri: kafka
-#       parameters:
-#         brokers: "{{kafka.brokers}}"
-#         groupId: customer-consumer-group
-#         saslJaasConfig: "{{?kafka.saslJaasConfig}}"
-#         saslMechanism: "{{?kafka.saslMechanism}}"
-#         securityProtocol: "{{?kafka.securityProtocol}}"
-#         topic: customer-topic
-#       steps:
-#         - to:
-#             id: logger-4
-#             uri: log
-#             parameters:
-#               loggerName: KafkaLogger
+        - to:
+            id: direct-kafka-out
+            uri: direct
+            parameters:
+              name: direct-kafka
+- route:
+    id: kafka-publish
+    description: Kafka Publish
+    from:
+      id: direct-kafka-in
+      uri: direct
+      parameters:
+        name: direct-kafka
+      steps:
+        - to:
+            id: to-kafka
+            uri: kafka
+            parameters:
+              brokers: "{{kafka.brokers}}"
+              topic: customer-topic
+- route:
+    id: kafka-subscribe
+    description: Kafka Subscribe
+    from:
+      id: from-kafka
+      uri: kafka
+      parameters:
+        brokers: "{{kafka.brokers}}"
+        groupId: customer-consumer-group
+        topic: customer-topic
+      steps:
+        - to:
+            id: logger-4
+            uri: log
+            parameters:
+              loggerName: KafkaLogger
