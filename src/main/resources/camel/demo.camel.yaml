@@ -109,7 +109,7 @@
             uri: kafka
             parameters:
               brokers: "{{kafka.brokers}}"
-              topic: customer-topic
+              topic: "{{kafka.topic}}"
 - route:
     id: kafka-subscribe
     description: Kafka Subscribe
@@ -119,7 +119,7 @@
       parameters:
         brokers: "{{kafka.brokers}}"
         groupId: customer-consumer-group
-        topic: customer-topic
+        topic: "{{kafka.topic}}"
       steps:
         - to:
             id: logger-4
